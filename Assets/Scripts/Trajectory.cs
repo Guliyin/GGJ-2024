@@ -27,7 +27,7 @@ public class Trajectory : MonoBehaviour
     }
     void DrawProjection()
     {
-        Strength = cannon.force;
+        Strength = cannon.fireForce;
 
         lineRenderer.enabled = true;
         lineRenderer.positionCount = Mathf.CeilToInt(linePoints / timeBetweenPoints) + 1;
