@@ -8,7 +8,8 @@ public class BulletDestroy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Statue"))
         {
-            print("Hole");
+            var contact = collision.GetContact(0);
+            collision.gameObject.GetComponentInParent<Statue>().Hit(contact.point, contact.normal);
         }
         else if (collision.gameObject.CompareTag("Part"))
         {

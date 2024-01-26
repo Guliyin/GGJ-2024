@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BulletPart : Bullet
 {
-    [SerializeField] GameObject a;
-    [SerializeField] GameObject b;
+    GameObject a;
+    GameObject b;
 
     private void Start()
     {

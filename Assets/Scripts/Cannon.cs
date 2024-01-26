@@ -51,7 +51,7 @@ public class Cannon : MonoBehaviour
         xRot -= input.y * turnRate;
         yRot += input.x * turnRate;
         xRot = Mathf.Clamp(xRot, 310, 320);
-        yRot = Mathf.Clamp(yRot, -4, 4);
+        yRot = Mathf.Clamp(yRot, -5, 5);
         Quaternion rotation = Quaternion.Euler(xRot, yRot, 0);
         gun.rotation = rotation;
     }
