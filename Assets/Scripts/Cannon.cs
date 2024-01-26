@@ -15,13 +15,14 @@ public class Cannon : MonoBehaviour
 
     private void Update()
     {
+        print(gun.localEulerAngles + " " + gun.rotation * Vector3.forward);
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Fire();
         }
         if (input != Vector2.zero)
         {
-            Quaternion q = Quaternion.LookRotation(gun.rotation * Vector3.forward + new Vector3(input.x, input.y, 0));
+            Quaternion q = Quaternion.LookRotation(gun.localRotation * Vector3.forward + new Vector3(input.x, input.y, 0));
             gun.rotation = Quaternion.Slerp(gun.rotation, q, Time.deltaTime * turnRate);
         }
     }
