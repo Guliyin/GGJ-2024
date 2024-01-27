@@ -40,7 +40,8 @@ public class Cannon : MonoBehaviour
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.AddForce(gunPos.forward * fireForce, ForceMode.Impulse);
 
-        EventCenter.Broadcast(FunctionType.Fire, bullet.transform);
+        EventCenter.Broadcast(FunctionType.Fire);
+        EventCenter.Broadcast(FunctionType.FireWithTransform, bullet.transform);
     }
     void RotateCamera()
     {

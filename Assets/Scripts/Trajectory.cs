@@ -23,13 +23,15 @@ public class Trajectory : MonoBehaviour
 
     void Update()
     {
-        DrawProjection();
+        if (lineRenderer.enabled)
+        {
+            DrawProjection();
+        }
     }
     void DrawProjection()
     {
         Strength = cannon.fireForce;
 
-        lineRenderer.enabled = true;
         lineRenderer.positionCount = Mathf.CeilToInt(linePoints / timeBetweenPoints) + 1;
         Vector3 startPos = gunPos.position;
         Vector3 startVel = Strength * gunPos.forward;
