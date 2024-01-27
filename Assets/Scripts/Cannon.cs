@@ -29,7 +29,7 @@ public class Cannon : MonoBehaviour
         }
         if (GameMgr.Instance.enableInput && input != Vector2.zero)
         {
-            RotateCamera();
+            RotateCanon();
         }
     }
     void Fire()
@@ -43,13 +43,13 @@ public class Cannon : MonoBehaviour
         EventCenter.Broadcast(FunctionType.Fire);
         EventCenter.Broadcast(FunctionType.FireWithTransform, bullet.transform);
     }
-    void RotateCamera()
+    void RotateCanon()
     {
         xRot -= input.y * turnRate;
         yRot += input.x * turnRate;
-        xRot = Mathf.Clamp(xRot, 310, 320);
-        yRot = Mathf.Clamp(yRot, -5, 5);
+        xRot = Mathf.Clamp(xRot, 310, 331);
+        yRot = Mathf.Clamp(yRot, -7, 7);
         Quaternion rotation = Quaternion.Euler(xRot, yRot, 0);
-        gun.rotation = rotation;
+        gun.localRotation = rotation;
     }
 }

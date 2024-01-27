@@ -21,6 +21,7 @@ public class Wind : MonoBehaviour
     [Range(0,50)]
     [SerializeField] int windMax;
     [SerializeField] TMP_Text text;
+    [SerializeField] bool enableWind = true;
 
     float windForce;
     public float WindForce => windForce;
@@ -31,9 +32,9 @@ public class Wind : MonoBehaviour
     }
     void NewWind()
     {
-        windForce = Random.Range(-windMax, windMax) / 10.0f;
+        windForce = enableWind ? Random.Range(-windMax, windMax) / 10.0f : 0;
 
-        text.text = "wind: " + windForce;
+        text.text = "Wind: " + windForce;
     }
     private void OnDisable()
     {
