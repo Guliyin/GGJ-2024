@@ -15,8 +15,8 @@ public class Cannon : MonoBehaviour
 
     [SerializeField] public Transform gun;
     [SerializeField] public Transform gunPos;
-    [SerializeField] GameObject partPrefab;
-    [SerializeField] GameObject bombPrefab;
+    [SerializeField] RotationDiagram2D load;
+    [SerializeField] GameObject[] projectiles;
 
     [SerializeField][Range(30, 32)] public float fireForce = 30;
     [SerializeField][Range(0, 1)] float turnRate = 0.1f;
@@ -29,27 +29,29 @@ public class Cannon : MonoBehaviour
         }
         if (GameMgr.Instance.enableInput && input != Vector2.zero)
         {
-            RotateCamera();
+            RotateCanon();
         }
     }
     void Fire()
     {
-        GameObject projectile = isPart ? partPrefab : bombPrefab;
+        //GameObject projectile = isPart ? projectiles : bombPrefab;
+        //-------------------------------------------------------------------------------------------------------------------------------------------------
+        int num = load.currentBulletIndex;
 
-        GameObject bullet = Instantiate(projectile, gunPos.position, gunPos.rotation);
+        GameObject bullet = Instantiate(projectiles[num], gunPos.position, gunPos.rotation);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.AddForce(gunPos.forward * fireForce, ForceMode.Impulse);
 
         EventCenter.Broadcast(FunctionType.Fire);
         EventCenter.Broadcast(FunctionType.FireWithTransform, bullet.transform);
     }
-    void RotateCamera()
+    void RotateCanon()
     {
         xRot -= input.y * turnRate;
         yRot += input.x * turnRate;
-        xRot = Mathf.Clamp(xRot, 310, 320);
-        yRot = Mathf.Clamp(yRot, -5, 5);
+        xRot = Mathf.Clamp(xRot, 310, 331);
+        yRot = Mathf.Clamp(yRot, -7, 7);
         Quaternion rotation = Quaternion.Euler(xRot, yRot, 0);
-        gun.rotation = rotation;
+        gun.localRotation = rotation;
     }
 }

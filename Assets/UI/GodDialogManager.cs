@@ -39,7 +39,7 @@ public class GodDialogManager : MonoBehaviour
     public void PlayRandomDialog()
     {
         PlayingTextAniNumbers++;
-        GetComponent<Image>().DOColor(new(0, 0, 0, 1), 0.25f);
+        GetComponent<Image>().DOColor(new(1, 1, 1, 1), 0.25f);
         int dialogNumbers = allDialogs.Length;
         int randomPlayIndex = Random.Range(0, dialogNumbers);
         TextFade(allDialogs[randomPlayIndex], textFadeTime);
@@ -67,7 +67,7 @@ public class GodDialogManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
         if (PlayingTextAniNumbers == 1)
         {
-            GetComponent<Image>().DOColor(new(0, 0, 0, 0), 0.1f);
+            GetComponent<Image>().DOColor(new(1, 1, 1, 0), 0.1f);
             dialogContent.GetComponent<TMP_Text>().text = "";
         }
         PlayingTextAniNumbers--;
