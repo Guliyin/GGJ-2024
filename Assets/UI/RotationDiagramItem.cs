@@ -55,19 +55,19 @@ public class RotationDiagramItem : MonoBehaviour
         Image.sprite = sprite;
     }
 
-    public void SetPosDate(ItemPosDate date)
+    public void SetPosData(ItemPosData data)
     {
-        Rect.DOAnchorPos(Vector2.right * date.X, aniTime);
-        Rect.DOScale(Vector3.one * date.ScaleTimes, aniTime);
-        //Rect.anchoredPosition = Vector2.right*date.X;
-        //Rect.localScale = Vector3.one * date.ScaleTimes;
-        StartCoroutine(Wait(date));
+        Rect.DOAnchorPos(Vector2.right * data.X, aniTime);
+        Rect.DOScale(Vector3.one * data.ScaleTimes, aniTime);
+        //Rect.anchoredPosition = Vector2.right*data.X;
+        //Rect.localScale = Vector3.one * data.ScaleTimes;
+        StartCoroutine(Wait(data));
     }
 
-    private IEnumerator Wait(ItemPosDate date)
+    private IEnumerator Wait(ItemPosData data)
     {
         yield return new WaitForSeconds(aniTime * 0.5f);
-        transform.SetSiblingIndex(date.Order);
+        transform.SetSiblingIndex(data.Order);
     }
 
     // public void OnDrag(PointerEventData eventData)
@@ -95,5 +95,45 @@ public class RotationDiagramItem : MonoBehaviour
             id += totalItemNum;
         }
         PosId = id % totalItemNum;
+
+        setTransparency();
+    }
+
+    public void setTransparency()
+    {
+        switch (PosId)
+        {
+            case 0:
+                GetComponent<Image>().DOColor(new(1, 1, 1, 1), 0.1f);
+                break;
+            case 1:
+                GetComponent<Image>().DOColor(new(1, 1, 1, 0.66f), 0.1f);
+                break;
+            case 2:
+                GetComponent<Image>().DOColor(new(1, 1, 1, 0.33f), 0.1f);
+                break;
+            case 3:
+                GetComponent<Image>().DOColor(new(1, 1, 1, 0), 0.1f);
+                break;
+            case 4:
+                GetComponent<Image>().DOColor(new(1, 1, 1, 0), 0.1f);
+                break;
+            case 5:
+                GetComponent<Image>().DOColor(new(1, 1, 1, 0), 0.1f);
+                break;
+            case 6:
+                GetComponent<Image>().DOColor(new(1, 1, 1, 0), 0.1f);
+                break;
+            case 7:
+                GetComponent<Image>().DOColor(new(1, 1, 1, 0), 0.1f);
+                break;
+            case 8:
+                GetComponent<Image>().DOColor(new(1, 1, 1, 0.33f), 0.1f);
+                break;
+            case 9:
+                GetComponent<Image>().DOColor(new(1, 1, 1, 0.66f), 0.1f);
+                break;
+            default: break;
+        }
     }
 }

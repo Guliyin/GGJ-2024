@@ -13,15 +13,15 @@ public class RotationDiagram2D : MonoBehaviour
     public float ScaleTimesMax;
 
     private List<RotationDiagramItem> itemList;
-    private List<ItemPosDate> posDateList;
+    private List<ItemPosData> posDataList;
 
     private void Awake()
     {
         itemList = new List<RotationDiagramItem>();
-        posDateList = new List<ItemPosDate>();
+        posDataList = new List<ItemPosData>();
         CreateItem();
-        CalulateDate();
-        SetItemDate();
+        CalulateData();
+        SetItemData();
     }
 
     private void Start()
@@ -68,16 +68,16 @@ public class RotationDiagram2D : MonoBehaviour
             item.ChangeId(symbol, itemList.Count);
         }
 
-        for (int i = 0; i < posDateList.Count; i++)
+        for (int i = 0; i < posDataList.Count; i++)
         {
-            itemList[i].SetPosDate(posDateList[itemList[i].PosId]);
+            itemList[i].SetPosData(posDataList[itemList[i].PosId]);
         }
     }
 
-    private void CalulateDate()
+    private void CalulateData()
     {
 
-        List<ItemDate> itemDateList = new List<ItemDate>();
+        List<ItemData> itemDataList = new List<ItemData>();
 
         float length = (ItemSize.x + offset) * itemList.Count;
         float radioOffset = 1 / (float)itemList.Count;
@@ -85,55 +85,56 @@ public class RotationDiagram2D : MonoBehaviour
 
         for (int i = 0; i < itemList.Count; i++)
         {
-            ItemDate itemDate = new ItemDate();
-            itemDate.PosId = i;
-            itemDateList.Add(itemDate);
+            ItemData itemData = new ItemData();
+            itemData.PosId = i;
+            itemDataList.Add(itemData);
             itemList[i].PosId = i;
 
 
-            ItemPosDate date = new ItemPosDate();
-            date.X = GetX(radio, length);
-            date.ScaleTimes = GetScaleTimes(radio, ScaleTimesMin, ScaleTimesMax);
+            ItemPosData data = new ItemPosData();
+            data.X = GetX(radio, length);
+            data.ScaleTimes = GetScaleTimes(radio, ScaleTimesMin, ScaleTimesMax);
 
             radio += radioOffset;
-            posDateList.Add(date);
+            posDataList.Add(data);
         }
 
-        itemDateList = itemDateList.OrderBy(u => posDateList[u.PosId].ScaleTimes).ToList();
+        itemDataList = itemDataList.OrderBy(u => posDataList[u.PosId].ScaleTimes).ToList();
 
-        for (int i = 0; i < itemDateList.Count; i++)
+        for (int i = 0; i < itemDataList.Count; i++)
         {
-            posDateList[itemDateList[i].PosId].Order = i;
+            posDataList[itemDataList[i].PosId].Order = i;
         }
     }
 
-    private void SetItemDate()
+    private void SetItemData()
     {
-        for (int i = 0; i < posDateList.Count; i++)
+        for (int i = 0; i < posDataList.Count; i++)
         {
-            itemList[i].SetPosDate(posDateList[i]);
+            itemList[i].SetPosData(posDataList[i]);
+            itemList[i].setTransparency();
         }
     }
 
-    private float GetX(float radio, float length)
+    private float GetX(float ratio, float length)
     {
-        if (radio > 1 || radio < 0)
+        if (ratio > 1 || ratio < 0)
         {
             Debug.LogError("当前比例必须是0-1");
             return 0;
         }
 
-        if (radio >= 0 && radio < 0.25f)
+        if (ratio >= 0 && ratio < 0.25f)
         {
-            return length * radio;
+            return length * ratio;
         }
-        else if (radio >= 0.25f && radio < 0.75f)
+        else if (ratio >= 0.25f && ratio < 0.75f)
         {
-            return length * (0.5f - radio);
+            return length * (0.5f - ratio);
         }
         else
         {
-            return length * (radio - 1);
+            return length * (ratio - 1);
         }
     }
 
@@ -157,14 +158,14 @@ public class RotationDiagram2D : MonoBehaviour
     }
 }
 
-public class ItemPosDate
+public class ItemPosData
 {
     public float X;
     public float ScaleTimes;
     public int Order;
 };
 
-public struct ItemDate
+public struct ItemData
 {
     public int PosId;
 };
