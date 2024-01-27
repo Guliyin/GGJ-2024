@@ -34,11 +34,9 @@ public class Cannon : MonoBehaviour
     }
     void Fire()
     {
-        //GameObject projectile = isPart ? projectiles : bombPrefab;
-        //-------------------------------------------------------------------------------------------------------------------------------------------------
         int num = load.currentBulletIndex;
 
-        GameObject bullet = Instantiate(projectiles[num], gunPos.position, gunPos.rotation);
+        GameObject bullet = Instantiate(projectiles[num], gunPos.position, Quaternion.identity);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.AddForce(gunPos.forward * fireForce, ForceMode.Impulse);
 
