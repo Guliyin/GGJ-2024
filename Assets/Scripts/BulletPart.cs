@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class BulletPart : Bullet
 {
+    float wind;
+
     GameObject a;
     GameObject b;
+    Rigidbody rb;
 
     private void Start()
     {
         a = transform.GetChild(0).gameObject;
         b = transform.GetChild(1).gameObject;
+        rb = GetComponent<Rigidbody>();
+        wind = Wind.Instance.WindForce;
+    }
+    private void Update()
+    {
+        rb.AddForce(wind * Vector3.right);
     }
     public void Hit()
     {
@@ -18,19 +27,18 @@ public class BulletPart : Bullet
         b.SetActive(true);
         Invoke("Destroy", 5);
     }
-
-    void Destroy()
+    protected override void Touch()
     {
-        Destroy(gameObject);
+        base.Touch();
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.isKinematic = true;
+        rb.useGravity = false;
     }
-
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Statue"))
+        if (collision.gameObject.CompareTag("Statue") || collision.gameObject.CompareTag("Part"))
         {
-            Rigidbody rb = GetComponent<Rigidbody>();
-            rb.isKinematic = true;
-            rb.useGravity = false;
+            Touch();
         }
     }
 }
