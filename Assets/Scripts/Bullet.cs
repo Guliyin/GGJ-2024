@@ -16,6 +16,7 @@ public class Bullet : MonoBehaviour
         if (firstTouch)
         {
             firstTouch = false;
+            EventCenter.Broadcast(FunctionType.Touch);
         }
     }
 }

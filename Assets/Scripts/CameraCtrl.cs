@@ -17,11 +17,14 @@ public class CameraCtrl : MonoBehaviour
     bool isFlying;
     [SerializeField] Transform facePos;
     [SerializeField] Transform showcasePos;
+    [SerializeField] float flyingDistance = 1;
+    [SerializeField] float flyingAnimLength = 0.2f;
     Transform projectile;
 
     private void OnEnable()
     {
-        EventCenter.AddListener<Transform>(FunctionType.Fire, PlayFlyingAnim);
+        EventCenter.AddListener<Transform>(FunctionType.FireWithTransform, PlayFlyingAnim);
+        EventCenter.AddListener(FunctionType.Touch, ShowcasePosition);
         EventCenter.AddListener(FunctionType.NewFire, FlyingAnimOver);
     }
 
@@ -45,7 +48,8 @@ public class CameraCtrl : MonoBehaviour
     {
         if (isFlying)
         {
-            
+            Vector3 dir = projectile.position - facePos.position;
+            m_Camera.transform.position = projectile.position + dir.normalized * flyingDistance;
         }
     }
     void ZoomIn()
@@ -62,18 +66,28 @@ public class CameraCtrl : MonoBehaviour
     }
     void PlayFlyingAnim(Transform projectile)
     {
+        m_Camera.DOFieldOfView(40, flyingAnimLength);
         isFlying = true;
         this.projectile = projectile;
+    }
+    void ShowcasePosition()
+    {
+        isFlying = false;
+        m_Camera.DOFieldOfView(60, flyingAnimLength);
+        m_Camera.transform.DOMove(showcasePos.position, flyingAnimLength);
+        m_Camera.transform.DORotate(showcasePos.rotation.eulerAngles, flyingAnimLength);
     }
     void FlyingAnimOver()
     {
         isFlying = false;
         projectile = null;
+        ResetCamera();
     }
 
     private void OnDisable()
     {
-        EventCenter.RemoveListener<Transform>(FunctionType.Fire, PlayFlyingAnim);
+        EventCenter.RemoveListener<Transform>(FunctionType.FireWithTransform, PlayFlyingAnim);
+        EventCenter.RemoveListener(FunctionType.Touch, ShowcasePosition);
         EventCenter.RemoveListener(FunctionType.NewFire, FlyingAnimOver);
     }
 }
