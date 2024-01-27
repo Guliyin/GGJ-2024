@@ -2,18 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletDestroy : MonoBehaviour
+public class BulletDestroy : Bullet
 {
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Statue"))
         {
-            var contact = collision.GetContact(0);
-            collision.gameObject.GetComponentInParent<Statue>().Hit(contact.point, contact.normal);
+            if (firstTouch)
+            {
+                Touch();
+                var contact = collision.GetContact(0);
+                collision.gameObject.GetComponentInParent<Statue>().Hit(contact.point, contact.normal);
+            }
         }
         else if (collision.gameObject.CompareTag("Part"))
         {
+            if(firstTouch) Touch();
             collision.transform.GetComponent<BulletPart>().Hit();
         }
+    }
+    protected override void Touch()
+    {
+        base.Touch();
+        Invoke("Destroy", 5);
     }
 }

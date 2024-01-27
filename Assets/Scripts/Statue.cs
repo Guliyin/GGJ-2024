@@ -9,7 +9,7 @@ public class Statue : MonoBehaviour
     public void Hit(Vector3 pos, Vector3 rot)
     {
         Quaternion rotation = Quaternion.LookRotation(rot);
-        GameObject g = Instantiate(holePrefab, pos, rotation, transform);
-        g.transform.LookAt(rot);
+        print(rotation.eulerAngles);
+        GameObject g = Instantiate(holePrefab, pos, rotation);
     }
 }

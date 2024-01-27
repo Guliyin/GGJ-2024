@@ -9,7 +9,7 @@ public class Cannon : MonoBehaviour
 
     Vector2 input => new Vector2(horizontalInput, verticalInput);
 
-    float xRot, yRot;
+    float xRot = 315, yRot = 0;
 
     [SerializeField] public bool isPart;
 
@@ -21,19 +21,13 @@ public class Cannon : MonoBehaviour
     [SerializeField][Range(30, 32)] public float fireForce = 30;
     [SerializeField][Range(0, 1)] float turnRate = 0.1f;
 
-    private void Start()
-    {
-        xRot = gun.rotation.eulerAngles.x;
-        yRot = gun.rotation.eulerAngles.y;
-    }
-
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (GameMgr.Instance.enableInput && Input.GetKeyDown(KeyCode.Space))
         {
             Fire();
         }
-        if (input != Vector2.zero)
+        if (GameMgr.Instance.enableInput && input != Vector2.zero)
         {
             RotateCamera();
         }
@@ -45,6 +39,8 @@ public class Cannon : MonoBehaviour
         GameObject bullet = Instantiate(projectile, gunPos.position, gunPos.rotation);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.AddForce(gunPos.forward * fireForce, ForceMode.Impulse);
+
+        EventCenter.Broadcast(FunctionType.Fire, bullet.transform);
     }
     void RotateCamera()
     {

@@ -46,6 +46,6 @@ public class Trajectory : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        DrawProjection();
+        //DrawProjection();
     }
 }
