@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
 
     private int selection;
     public GameObject[] allButtons;
+    public GameObject[] gameUI;
     public GameObject credits;
     private bool isCreditsShowing;
 
@@ -40,7 +41,7 @@ public class MainMenu : MonoBehaviour
                     UpdateSelection();
                 }
             }
-            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Return))
             {
                 AudioManager.Instance.PlaySFX("ButtonPress");
                 Selected();
@@ -62,6 +63,10 @@ public class MainMenu : MonoBehaviour
         {
             case 0:
                 UIManager.Instance.StartGame();
+                foreach (GameObject ui in gameUI)
+                {
+                    ui.SetActive(true);
+                }
                 break;
             case 1:
                 //credits.SetActive(!credits.activeSelf);

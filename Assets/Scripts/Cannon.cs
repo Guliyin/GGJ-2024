@@ -32,13 +32,16 @@ public class Cannon : MonoBehaviour
 
     private void Update()
     {
-        if (GameMgr.Instance.enableInput && Input.GetKeyDown(KeyCode.Space))
+        if (UIManager.Instance.currentProgress == UIManager.GameProgress.MainGame)
         {
-            Fire();
-        }
-        if (GameMgr.Instance.enableInput && input != Vector2.zero)
-        {
-            RotateCanon();
+            if (GameMgr.Instance.enableInput && Input.GetKeyDown(KeyCode.Space))
+            {
+                Fire();
+            }
+            if (GameMgr.Instance.enableInput && input != Vector2.zero)
+            {
+                RotateCanon();
+            }
         }
     }
     void Fire()
@@ -51,6 +54,7 @@ public class Cannon : MonoBehaviour
 
         EventCenter.Broadcast(FunctionType.Fire);
         EventCenter.Broadcast(FunctionType.FireWithTransform, bullet.transform);
+        AudioManager.Instance.PlaySFX("CannonFire");
     }
     void RotateCanon()
     {

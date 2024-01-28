@@ -13,7 +13,7 @@ public class RotationDiagram2D : MonoBehaviour
     public float ScaleTimesMax;
     public int currentBulletIndex;
     public ArrayList bulletSequence;
-    public enum BulletType { Nose, Mouth, EyeL, EyeR, EyebrowL, EyebrowR, Fringes, GrapeL, GrapeR, Bomb};
+    public enum BulletType { Nose, Mouth, EyeL, EyeR, EyebrowL, EyebrowR, Fringes, GrapeL, GrapeR, Bomb };
 
     private List<RotationDiagramItem> itemList;
     private List<ItemPosData> posDataList;
@@ -49,14 +49,17 @@ public class RotationDiagram2D : MonoBehaviour
     }
     private void Update()
     {
-        if (GameMgr.Instance.enableInput && Input.GetKeyDown(KeyCode.Q))
+        if (UIManager.Instance.currentProgress == UIManager.GameProgress.MainGame)
         {
-            BulletLeftSwitch();
-        }
+            if (GameMgr.Instance.enableInput && Input.GetKeyDown(KeyCode.Q))
+            {
+                BulletLeftSwitch();
+            }
 
-        if (GameMgr.Instance.enableInput && Input.GetKeyDown(KeyCode.E))
-        {
-            BulletRightSwitch();
+            if (GameMgr.Instance.enableInput && Input.GetKeyDown(KeyCode.E))
+            {
+                BulletRightSwitch();
+            }
         }
     }
 
@@ -200,6 +203,7 @@ public class RotationDiagram2D : MonoBehaviour
             currentBulletIndex--;
         }
         Change(1);
+        AudioManager.Instance.PlaySFX("CannonSwitch");
         //print(bulletSequence[currentBulletIndex]);
     }
 
@@ -214,6 +218,7 @@ public class RotationDiagram2D : MonoBehaviour
             currentBulletIndex++;
         }
         Change(-1);
+        AudioManager.Instance.PlaySFX("CannonSwitch");
         //print(bulletSequence[currentBulletIndex]);
     }
 }

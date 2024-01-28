@@ -13,11 +13,16 @@ public class BulletDestroy : Bullet
                 Touch();
                 var contact = collision.GetContact(0);
                 collision.gameObject.GetComponentInParent<Statue>().Hit(contact.point, contact.normal);
+                AudioManager.Instance.PlaySFX("RockHole");
             }
         }
         else if (collision.gameObject.CompareTag("Part"))
         {
-            if(firstTouch) Touch();
+            if (firstTouch)
+            {
+                Touch();
+                AudioManager.Instance.PlaySFX("RockBroken");
+            }
             collision.transform.GetComponent<BulletPart>().Hit();
             if (collision.gameObject.name == "Cup")
             {

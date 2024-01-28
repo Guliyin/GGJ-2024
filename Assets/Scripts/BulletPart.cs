@@ -42,6 +42,7 @@ public class BulletPart : Bullet
         if (collision.gameObject.CompareTag("Statue") || collision.gameObject.CompareTag("Part"))
         {
             Touch();
+            AudioManager.Instance.PlaySFX("Stick");
         }
     }
 }
