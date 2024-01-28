@@ -11,9 +11,13 @@ public class RotationDiagram2D : MonoBehaviour
     public float offset;
     public float ScaleTimesMin;
     public float ScaleTimesMax;
+    public int currentBulletIndex;
+    public ArrayList bulletSequence;
+    public enum BulletType { Nose, Mouth, EyeL, EyeR, EyebrowL, EyebrowR, Fringes, GrapeL, GrapeR, Bomb};
 
     private List<RotationDiagramItem> itemList;
     private List<ItemPosData> posDataList;
+
 
     private void Awake()
     {
@@ -22,11 +26,38 @@ public class RotationDiagram2D : MonoBehaviour
         CreateItem();
         CalulateData();
         SetItemData();
+
+        bulletSequence = new ArrayList
+        {
+            BulletType.Nose,
+            BulletType.Mouth,
+            BulletType.EyeL,
+            BulletType.EyeR,
+            BulletType.EyebrowL,
+            BulletType.EyebrowR,
+            BulletType.Fringes,
+            BulletType.GrapeL,
+            BulletType.GrapeR,
+            BulletType.Bomb,
+        };
+        currentBulletIndex = 0;
     }
 
     private void Start()
     {
         ///btns = transform.GetComponentInChildren<Button>();
+    }
+    private void Update()
+    {
+        if (GameMgr.Instance.enableInput && Input.GetKeyDown(KeyCode.Q))
+        {
+            BulletLeftSwitch();
+        }
+
+        if (GameMgr.Instance.enableInput && Input.GetKeyDown(KeyCode.E))
+        {
+            BulletRightSwitch();
+        }
     }
 
     private GameObject CreateTemplate()
@@ -155,6 +186,35 @@ public class RotationDiagram2D : MonoBehaviour
         {
             return max - scaleOffset * (1 - radio);
         }
+    }
+
+
+    public void BulletLeftSwitch()
+    {
+        if (currentBulletIndex == 0)
+        {
+            currentBulletIndex = bulletSequence.Count - 1;
+        }
+        else
+        {
+            currentBulletIndex--;
+        }
+        Change(1);
+        //print(bulletSequence[currentBulletIndex]);
+    }
+
+    public void BulletRightSwitch()
+    {
+        if (currentBulletIndex == bulletSequence.Count - 1)
+        {
+            currentBulletIndex = 0;
+        }
+        else
+        {
+            currentBulletIndex++;
+        }
+        Change(-1);
+        //print(bulletSequence[currentBulletIndex]);
     }
 }
 

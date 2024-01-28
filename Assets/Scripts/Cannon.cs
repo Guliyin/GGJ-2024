@@ -15,11 +15,20 @@ public class Cannon : MonoBehaviour
 
     [SerializeField] public Transform gun;
     [SerializeField] public Transform gunPos;
-    [SerializeField] GameObject partPrefab;
-    [SerializeField] GameObject bombPrefab;
+    [SerializeField] RotationDiagram2D load;
+    [SerializeField] GameObject[] projectiles;
 
     [SerializeField][Range(30, 32)] public float fireForce = 30;
     [SerializeField][Range(0, 1)] float turnRate = 0.1f;
+
+    private void Start()
+    {
+        for (int i = 0; i < projectiles.Length; i++)
+        {
+            if (i == projectiles.Length - 1) return;
+            projectiles[i].GetComponent<BulletPart>().num = i;
+        }
+    }
 
     private void Update()
     {
@@ -34,9 +43,9 @@ public class Cannon : MonoBehaviour
     }
     void Fire()
     {
-        GameObject projectile = isPart ? partPrefab : bombPrefab;
+        int num = load.currentBulletIndex;
 
-        GameObject bullet = Instantiate(projectile, gunPos.position, gunPos.rotation);
+        GameObject bullet = Instantiate(projectiles[num], gunPos.position, Quaternion.identity);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.AddForce(gunPos.forward * fireForce, ForceMode.Impulse);
 

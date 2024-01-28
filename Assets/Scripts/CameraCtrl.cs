@@ -67,6 +67,7 @@ public class CameraCtrl : MonoBehaviour
     }
     void PlayFlyingAnim(Transform projectile)
     {
+        DOTween.KillAll();
         m_Camera.DOFieldOfView(40, flyingAnimLength);
         isFlying = true;
         this.projectile = projectile;

@@ -17,6 +17,7 @@ public class Trajectory : MonoBehaviour
     [Range(0.01f, 0.25f)] float timeBetweenPoints = 0.1f;
     [SerializeField] LayerMask layerMask;
     [SerializeField] Transform crosshair;
+    [SerializeField] Material dottedLine;
 
     void Start()
     {
@@ -54,8 +55,9 @@ public class Trajectory : MonoBehaviour
                 crosshair.position = Vector3.Lerp(crosshair.position, lastPos, 0.2f);
                 crosshair.rotation = Quaternion.LookRotation((point - lastPos).normalized);
                 //crosshair.rotation = Quaternion.Slerp(crosshair.rotation, Quaternion.Euler((point - lastPos).normalized), 0.5f);
-                //lineRenderer.SetPosition(i, hit.point);
-                //lineRenderer.positionCount = i;
+                lineRenderer.SetPosition(i, hit.point);
+                lineRenderer.positionCount = i;
+                dottedLine.SetFloat("Length", i);
                 return;
             }
         }
