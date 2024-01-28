@@ -9,7 +9,7 @@ using UnityEngine.AI;
 
 public class GodDialogManager : MonoBehaviour
 {
-
+    public static GodDialogManager Instance;
     public GameObject dialogContent;
     public string[] allDialogs;
     public string[] complimentDialogs;
@@ -27,6 +27,17 @@ public class GodDialogManager : MonoBehaviour
 
     void Awake()
     {
+
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         textFadeTime = 0.5f;
         playingTextAniNumbers = 0;
 
@@ -121,33 +132,15 @@ public class GodDialogManager : MonoBehaviour
 
     public void PlayDialogBlame()
     {
-        playingTextAniNumbers++;
-        GetComponent<Image>().DOColor(new(1, 1, 1, 1), 0.25f);
-        TextFade(blameDialogs[blameIndex], textFadeTime);
-        string temp = "blame" + (blameIndex + 1).ToString();
-        AudioManager.Instance.PlaySFX(temp);
-        blameIndex = (blameIndex + 1) % blameDialogs.Length;
-        StartCoroutine(TextBoxKill());
+        StartCoroutine(Blame());
     }
     public void PlayDialogNeutral()
     {
-        playingTextAniNumbers++;
-        GetComponent<Image>().DOColor(new(1, 1, 1, 1), 0.25f);
-        TextFade(neutralDialogs[neutralIndex], textFadeTime);
-        string temp = "neutral" + (neutralIndex + 1).ToString();
-        AudioManager.Instance.PlaySFX(temp);
-        neutralIndex = (neutralIndex + 1) % neutralDialogs.Length;
-        StartCoroutine(TextBoxKill());
+        StartCoroutine(Neutral());
     }
     public void PlayDialogCompliment()
     {
-        playingTextAniNumbers++;
-        GetComponent<Image>().DOColor(new(1, 1, 1, 1), 0.25f);
-        TextFade(complimentDialogs[complimentIndex], textFadeTime);
-        string temp = "compliment" + (complimentIndex + 1).ToString();
-        AudioManager.Instance.PlaySFX(temp);
-        complimentIndex = (complimentIndex + 1) % complimentDialogs.Length;
-        StartCoroutine(TextBoxKill());
+        StartCoroutine(Compliment());
     }
     public void PlayDialogIntro()
     {
@@ -161,17 +154,11 @@ public class GodDialogManager : MonoBehaviour
     }
     public void PlayDialogCup()
     {
-        playingTextAniNumbers++;
-        GetComponent<Image>().DOColor(new(1, 1, 1, 1), 0.25f);
-        TextFade(cupDialog, textFadeTime);
-        StartCoroutine(TextBoxKill());
+        StartCoroutine(Cup());
     }
     public void PlayDialogThat()
     {
-        playingTextAniNumbers++;
-        GetComponent<Image>().DOColor(new(1, 1, 1, 1), 0.25f);
-        TextFade(thatDialog, textFadeTime);
-        StartCoroutine(TextBoxKill());
+        StartCoroutine(That());
     }
 
     public void OpeningDialog()
@@ -214,6 +201,58 @@ public class GodDialogManager : MonoBehaviour
         PlayDialogIntro();
         yield return new WaitForSeconds(7f);
         EndIntro();
+    }
+
+    IEnumerator Blame()
+    {
+        yield return new WaitForSeconds(1f);
+        playingTextAniNumbers++;
+        GetComponent<Image>().DOColor(new(1, 1, 1, 1), 0.25f);
+        TextFade(blameDialogs[blameIndex], textFadeTime);
+        string temp = "blame" + (blameIndex + 1).ToString();
+        AudioManager.Instance.PlaySFX(temp);
+        blameIndex = (blameIndex + 1) % blameDialogs.Length;
+        StartCoroutine(TextBoxKill());
+    }
+    IEnumerator Compliment()
+    {
+        yield return new WaitForSeconds(1f);
+        playingTextAniNumbers++;
+        GetComponent<Image>().DOColor(new(1, 1, 1, 1), 0.25f);
+        TextFade(complimentDialogs[complimentIndex], textFadeTime);
+        string temp = "compliment" + (complimentIndex + 1).ToString();
+        AudioManager.Instance.PlaySFX(temp);
+        complimentIndex = (complimentIndex + 1) % complimentDialogs.Length;
+        StartCoroutine(TextBoxKill());
+    }
+    IEnumerator Neutral()
+    {
+        yield return new WaitForSeconds(1f);
+        playingTextAniNumbers++;
+        GetComponent<Image>().DOColor(new(1, 1, 1, 1), 0.25f);
+        TextFade(neutralDialogs[neutralIndex], textFadeTime);
+        string temp = "neutral" + (neutralIndex + 1).ToString();
+        AudioManager.Instance.PlaySFX(temp);
+        neutralIndex = (neutralIndex + 1) % neutralDialogs.Length;
+        StartCoroutine(TextBoxKill());
+    }
+    IEnumerator Cup()
+    {
+        yield return new WaitForSeconds(1f);
+        playingTextAniNumbers++;
+        GetComponent<Image>().DOColor(new(1, 1, 1, 1), 0.25f);
+        TextFade(cupDialog, textFadeTime);
+        AudioManager.Instance.PlaySFX("cup");
+        StartCoroutine(TextBoxKill());
+    }
+    IEnumerator That()
+    {
+        yield return new WaitForSeconds(1f);
+        playingTextAniNumbers++;
+        GetComponent<Image>().DOColor(new(1, 1, 1, 1), 0.25f);
+        TextFade(thatDialog, textFadeTime);
+        AudioManager.Instance.PlaySFX("that");
+        StartCoroutine(TextBoxKill());
     }
 
 }

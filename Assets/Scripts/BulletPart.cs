@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Callbacks;
 using UnityEngine;
 
 public class BulletPart : Bullet
@@ -29,8 +30,11 @@ public class BulletPart : Bullet
     protected override void Touch()
     {
         base.Touch();
-        GameMgr.Instance.CalculateDistance(num, transform.position);
         Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb.useGravity != false)
+        {
+            GameMgr.Instance.CalculateDistance(num, transform.position);
+        }
         rb.isKinematic = true;
         rb.useGravity = false;
     }

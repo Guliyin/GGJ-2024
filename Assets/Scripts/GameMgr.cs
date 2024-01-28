@@ -42,18 +42,21 @@ public class GameMgr : MonoBehaviour
     }
     public void CalculateDistance(int num, Vector3 position)
     {
-        float score = Vector3.Distance(cPos.pos[num],position);
-        if(score <= 0.5f)
+        float score = Vector3.Distance(cPos.pos[num], position);
+        if (score <= 0.5f)
         {
             print(score + " Good!");
+            GodDialogManager.Instance.PlayDialogCompliment();
         }
-        else if(score <= 1 && score > 0.5f)
+        else if (score <= 1 && score > 0.5f)
         {
             print(score + " Normal");
+            GodDialogManager.Instance.PlayDialogNeutral();
         }
         else
         {
             print(score + " Bad!");
+            GodDialogManager.Instance.PlayDialogBlame();
         }
     }
     private void OnDisable()

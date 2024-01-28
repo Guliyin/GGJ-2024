@@ -27,6 +27,7 @@ public class BulletDestroy : Bullet
             if (collision.gameObject.name == "Cup")
             {
                 print("Angry!");
+                GodDialogManager.Instance.PlayDialogCup();
             }
         }
     }
