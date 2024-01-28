@@ -266,6 +266,6 @@ Material:
     - _RimColor: {r: 1, g: 1, b: 1, a: 0}
     - _RimShadowColor: {r: 0, g: 0.05551431, b: 0.9622642, a: 0}
     - _SecondaryColor: {r: 1, g: 1, b: 1, a: 0}
-    - _ShadowColor: {r: 0.18431373, g: 0.5555443, b: 0.6039216, a: 0}
+    - _ShadowColor: {r: 0.42423162, g: 0.5178709, b: 0.5188679, a: 0}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
