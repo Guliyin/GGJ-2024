@@ -1801,6 +1801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5288a82d6ef8a68499d74f60e4feebf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  num: 0
 --- !u!54 &704442139
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1881,6 +1882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd2bef9f2f23b624aa7b29788147179c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pos: []
 --- !u!1 &751675591
 GameObject:
   m_ObjectHideFlags: 0
@@ -2605,6 +2607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5288a82d6ef8a68499d74f60e4feebf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  num: 0
 --- !u!54 &856484475
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3839,7 +3842,7 @@ MonoBehaviour:
   - {fileID: 688705072803259351, guid: a65dc150d6f9da5429b163855f6d0c2e, type: 3}
   - {fileID: 4997407146877080149, guid: a9eb037bc30d8a14eb0c44aae78697d4, type: 3}
   fireForce: 30
-  turnRate: 0.1
+  turnRate: 0.05
 --- !u!114 &1702691236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3852,9 +3855,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc3c9d503f089ed42b8504497d4df698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableWave: 0
+  enableWave: 1
   waveMax: 50
-  waveMin: 20
+  waveMin: 50
   waveSpeed: 1.5
   text: {fileID: 347586740}
 --- !u!1 &1748006054 stripped
