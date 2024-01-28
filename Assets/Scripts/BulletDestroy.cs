@@ -30,6 +30,16 @@ public class BulletDestroy : Bullet
             }
         }
     }
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        print(wind);
+        wind = Wind.Instance.WindForce;
+    }
+    private void Update()
+    {
+        rb.AddForce(wind * Vector3.right);
+    }
     protected override void Touch()
     {
         base.Touch();

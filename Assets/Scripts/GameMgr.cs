@@ -43,7 +43,18 @@ public class GameMgr : MonoBehaviour
     public void CalculateDistance(int num, Vector3 position)
     {
         float score = Vector3.Distance(cPos.pos[num],position);
-        print(score);
+        if(score <= 0.5f)
+        {
+            print(score + " Good!");
+        }
+        else if(score <= 1 && score > 0.5f)
+        {
+            print(score + " Normal");
+        }
+        else
+        {
+            print(score + " Bad!");
+        }
     }
     private void OnDisable()
     {

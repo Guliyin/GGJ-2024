@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     public void StartGame()
     {
         startMenuBG.SetActive(false);
+        EventCenter.Broadcast(FunctionType.StartGame);
         currentProgress = GameProgress.MainGame;
         AudioManager.Instance.PlayMusic("Sea");
     }

@@ -218,7 +218,7 @@ Material:
     - _StepOffset: 0
     - _Strength: 0.076
     - _Surface: 0
-    - _Thicnkess: 0.001
+    - _Thicnkess: 0.004
     - _UVAnimationSpeed: 2
     - _UVAnimationSpeedSpec: 2
     - _UVAnimationSpeedWarp: 2
@@ -261,7 +261,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HalftoneColor: {r: 0, g: 0, b: 0, a: 1}
     - _HatchingColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OutlineColor: {r: 0.010086612, g: 0.18867922, b: 0.0130652385, a: 0}
+    - _OutlineColor: {r: 0, g: 0.07988755, b: 0.14150941, a: 0}
     - _PrimaryColor: {r: 1, g: 1, b: 1, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 0}
     - _RimShadowColor: {r: 0, g: 0.05551431, b: 0.9622642, a: 0}
