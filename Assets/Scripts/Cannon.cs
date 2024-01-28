@@ -21,6 +21,15 @@ public class Cannon : MonoBehaviour
     [SerializeField][Range(30, 32)] public float fireForce = 30;
     [SerializeField][Range(0, 1)] float turnRate = 0.1f;
 
+    private void Start()
+    {
+        for (int i = 0; i < projectiles.Length; i++)
+        {
+            if (i == projectiles.Length - 1) return;
+            projectiles[i].GetComponent<BulletPart>().num = i;
+        }
+    }
+
     private void Update()
     {
         if (GameMgr.Instance.enableInput && Input.GetKeyDown(KeyCode.Space))

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BulletPart : Bullet
 {
+    public int num;
+
     float wind;
 
     GameObject a;
@@ -30,6 +32,7 @@ public class BulletPart : Bullet
     protected override void Touch()
     {
         base.Touch();
+        GameMgr.Instance.CalculateDistance(num, transform.position);
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
         rb.useGravity = false;

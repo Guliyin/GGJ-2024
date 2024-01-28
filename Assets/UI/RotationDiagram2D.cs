@@ -200,7 +200,7 @@ public class RotationDiagram2D : MonoBehaviour
             currentBulletIndex--;
         }
         Change(1);
-        print(bulletSequence[currentBulletIndex]);
+        //print(bulletSequence[currentBulletIndex]);
     }
 
     public void BulletRightSwitch()
@@ -214,7 +214,7 @@ public class RotationDiagram2D : MonoBehaviour
             currentBulletIndex++;
         }
         Change(-1);
-        print(bulletSequence[currentBulletIndex]);
+        //print(bulletSequence[currentBulletIndex]);
     }
 }
 
