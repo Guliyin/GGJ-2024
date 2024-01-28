@@ -5,7 +5,9 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
-    private enum CurrentProgress { MainMenu, MainGame, EndGame };
+    public enum GameProgress { MainMenu, MainGame, EndGame };
+    public GameProgress currentProgress;
+    public GameObject startMenuBG;
 
     private void Awake()
     {
@@ -18,5 +20,20 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        currentProgress = GameProgress.MainMenu;
+    }
+
+
+    public void StartGame()
+    {
+        startMenuBG.SetActive(false);
+        currentProgress = GameProgress.MainGame;
+        AudioManager.Instance.PlayMusic("Sea");
+    }
+
+    public void FinishGame()
+    {
+        currentProgress = GameProgress.EndGame;
     }
 }
