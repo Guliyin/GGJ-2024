@@ -24,6 +24,7 @@ public class GodDialogManager : MonoBehaviour
     private int neutralIndex;
     private int blameIndex;
     private int introIndex;
+    public bool canRespond;
 
     void Awake()
     {
@@ -31,15 +32,11 @@ public class GodDialogManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
         }
 
         textFadeTime = 0.5f;
         playingTextAniNumbers = 0;
+        canRespond = false;
 
         allDialogs = new string[]{
             "1111111111",
@@ -91,26 +88,8 @@ public class GodDialogManager : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            PlayDialogBlame();
-        }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            PlayDialogNeutral();
-        }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            PlayDialogCompliment();
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            OpeningDialog();
-        }
-    }
 
+    
     public void TextFade(string toText, float fadeTime)
     {
         string temp = dialogContent.GetComponent<TMP_Text>().text;
@@ -132,15 +111,27 @@ public class GodDialogManager : MonoBehaviour
 
     public void PlayDialogBlame()
     {
-        StartCoroutine(Blame());
+        if (canRespond)
+        {
+            StartCoroutine(Blame());
+        }
+
     }
     public void PlayDialogNeutral()
     {
-        StartCoroutine(Neutral());
+        if (canRespond)
+        {
+            StartCoroutine(Neutral());
+        }
+            
     }
     public void PlayDialogCompliment()
     {
-        StartCoroutine(Compliment());
+        if (canRespond)
+        {
+            StartCoroutine(Compliment());
+        }
+            
     }
     public void PlayDialogIntro()
     {
@@ -154,11 +145,19 @@ public class GodDialogManager : MonoBehaviour
     }
     public void PlayDialogCup()
     {
-        StartCoroutine(Cup());
+        if (canRespond)
+        {
+            StartCoroutine(Cup());
+        }
+            
     }
     public void PlayDialogThat()
     {
-        StartCoroutine(That());
+        if (canRespond)
+        {
+            StartCoroutine(That());
+        }
+            
     }
 
     public void OpeningDialog()
@@ -200,6 +199,7 @@ public class GodDialogManager : MonoBehaviour
         yield return new WaitForSeconds(7f);
         PlayDialogIntro();
         yield return new WaitForSeconds(7f);
+        canRespond = true;
         EndIntro();
     }
 

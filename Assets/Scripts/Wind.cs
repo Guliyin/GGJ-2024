@@ -44,10 +44,9 @@ public class Wind : MonoBehaviour
     }
     void UpdateWindMat()
     {
-        print("wtf");
         float n = windForce >= 0 ? -0.5f : 0.5f;
-        windMat.SetFloat("_Dir", n);
-        windMat.SetFloat("_Number", windForce * 10);
+        windMat.SetFloat("_Dir", 0.5f);
+        windMat.SetFloat("_Number", Mathf.Abs(windForce) * 10);
 
         windUI.localScale = new Vector3(windForce * 10 * 0.025f, 1, 0.02f);
         windUI.localPosition = new Vector3(Mathf.Abs(windForce), 0, 0);

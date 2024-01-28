@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class CameraCtrl : MonoBehaviour
 {
-    Camera m_Camera;
+    [SerializeField] Camera m_Camera;
 
     [Header("ZoomAnim")]
     [SerializeField] Transform camPos1;
@@ -32,7 +32,8 @@ public class CameraCtrl : MonoBehaviour
 
     void Start()
     {
-        m_Camera = Camera.main;
+        //m_Camera = Camera.main;
+        //m_Camera.Render();
     }
 
     void Update()

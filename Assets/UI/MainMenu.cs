@@ -67,6 +67,7 @@ public class MainMenu : MonoBehaviour
                 {
                     ui.SetActive(true);
                 }
+                GodDialogManager.Instance.OpeningDialog();
                 break;
             case 1:
                 //credits.SetActive(!credits.activeSelf);

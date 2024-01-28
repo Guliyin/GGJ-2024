@@ -33,7 +33,7 @@ Transform:
   - {fileID: 1280202107343613897}
   - {fileID: 1804898125203599492}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!114 &5501501066525117929
 MonoBehaviour:
@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5288a82d6ef8a68499d74f60e4feebf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  num: 0
 --- !u!54 &1358517422908378761
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -156,6 +157,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: d8a3d8a37d6dcb54e95ff79cc64c09d0,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d8a3d8a37d6dcb54e95ff79cc64c09d0,
         type: 3}
@@ -308,15 +314,40 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: -6128317761936424966, guid: 76e4e631e3cf93d4197c051588cb5c99,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4621145115928046326, guid: 76e4e631e3cf93d4197c051588cb5c99,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -3443708691732261591, guid: 76e4e631e3cf93d4197c051588cb5c99,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -3246895210274068100, guid: 76e4e631e3cf93d4197c051588cb5c99,
         type: 3}
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: -2705909630653555981, guid: 76e4e631e3cf93d4197c051588cb5c99,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -2548494047473188557, guid: 76e4e631e3cf93d4197c051588cb5c99,
         type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -2117696966782173203, guid: 76e4e631e3cf93d4197c051588cb5c99,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -1948313921813579897, guid: 76e4e631e3cf93d4197c051588cb5c99,
         type: 3}
@@ -332,6 +363,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -344799970922000047, guid: 76e4e631e3cf93d4197c051588cb5c99,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 76e4e631e3cf93d4197c051588cb5c99,
         type: 3}
@@ -353,6 +389,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 1859055704724900379, guid: 76e4e631e3cf93d4197c051588cb5c99,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2008440893028282770, guid: 76e4e631e3cf93d4197c051588cb5c99,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4393088937221939176, guid: 76e4e631e3cf93d4197c051588cb5c99,
         type: 3}
       propertyPath: m_Layer
@@ -362,6 +408,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5062846166596131504, guid: 76e4e631e3cf93d4197c051588cb5c99,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448875815269272714, guid: 76e4e631e3cf93d4197c051588cb5c99,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165254501543724461, guid: 76e4e631e3cf93d4197c051588cb5c99,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8809064805838593031, guid: 76e4e631e3cf93d4197c051588cb5c99,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8884648592514032227, guid: 76e4e631e3cf93d4197c051588cb5c99,
         type: 3}

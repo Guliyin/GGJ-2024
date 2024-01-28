@@ -7,6 +7,6 @@ public class Museum : MonoBehaviour
 {
     public void BackToSceneOne()
     {
-        SceneManager.LoadScene(0);
+        Application.Quit();
     }
 }
