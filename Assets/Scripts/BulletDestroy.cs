@@ -19,6 +19,10 @@ public class BulletDestroy : Bullet
         {
             if(firstTouch) Touch();
             collision.transform.GetComponent<BulletPart>().Hit();
+            if (collision.gameObject.name == "Cup")
+            {
+                print("Angry!");
+            }
         }
     }
     protected override void Touch()
