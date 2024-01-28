@@ -15,18 +15,20 @@ public class GodDialogManager : MonoBehaviour
     public string[] complimentDialogs;
     public string[] neutralDialogs;
     public string[] blameDialogs;
+    public string[] introDialogs;
     public string cupDialog;
     public string thatDialog;
     public float textFadeTime;
-    private int PlayingTextAniNumbers;
+    private int playingTextAniNumbers;
     private int complimentIndex;
     private int neutralIndex;
     private int blameIndex;
+    private int introIndex;
 
     void Awake()
     {
         textFadeTime = 0.5f;
-        PlayingTextAniNumbers = 0;
+        playingTextAniNumbers = 0;
 
         allDialogs = new string[]{
             "1111111111",
@@ -39,7 +41,7 @@ public class GodDialogManager : MonoBehaviour
         complimentDialogs = new string[]{
             "Nice Shot!",
             "Well, well, well, look who's a sharpshooter extraordinaire!",
-            "Time to apply for the Olympics shooting!",
+            "Time to apply for the Olympics shooting match!",
             "Good job my fellow!",
             "Watch out fellows, we've got a sharpshooting legend in our midst!",
             "Maybe I can introduce you to Artemis next time."
@@ -52,7 +54,7 @@ public class GodDialogManager : MonoBehaviour
         };
 
         blameDialogs = new string[]{
-            "You mischievous bunch!",
+            "You mischief-maker!",
             "Is this a comedy act?",
             "Ah, you prankster!",
             "You just cannot resist adding a touch of chaos to the mix?",
@@ -63,10 +65,39 @@ public class GodDialogManager : MonoBehaviour
         cupDialog = "This cup comes out of your pay.";
         thatDialog = "This is a blasphemy!";
 
+        introDialogs = new string[]{
+            "Well hello Pygmalion. I'm Dyonysus, the God of Wine.",
+            "They said you're the best sculptor in the world.",
+            "I now command you to complete all the facial features for me within 7 days.",
+            "Take out your blueprint (press [TAB]) and examine it carefully!",
+            "Win my favour or I will send you to greet Hades!!",
+        };
+
         complimentIndex = 0;
         neutralIndex = 0;
         blameIndex = 0;
+        introIndex = 0;
 
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            PlayDialogBlame();
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            PlayDialogNeutral();
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            PlayDialogCompliment();
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            OpeningDialog();
+        }
     }
 
     public void TextFade(string toText, float fadeTime)
@@ -78,7 +109,7 @@ public class GodDialogManager : MonoBehaviour
 
     public void PlayRandomDialog()
     {
-        PlayingTextAniNumbers++;
+        playingTextAniNumbers++;
         GetComponent<Image>().DOColor(new(1, 1, 1, 1), 0.25f);
         int dialogNumbers = allDialogs.Length;
         int randomPlayIndex = Random.Range(0, dialogNumbers);
@@ -86,70 +117,103 @@ public class GodDialogManager : MonoBehaviour
         StartCoroutine(TextBoxKill());
     }
 
-    public void PlayDialogByIndex(int index)
-    {
-        PlayingTextAniNumbers++;
-        TextFade(allDialogs[index], textFadeTime);
-        PlayDialogVoice(index);
-        StartCoroutine(TextBoxKill());
-    }
 
-    public void playDialogBlame()
+
+    public void PlayDialogBlame()
     {
-        PlayingTextAniNumbers++;
+        playingTextAniNumbers++;
         GetComponent<Image>().DOColor(new(1, 1, 1, 1), 0.25f);
         TextFade(blameDialogs[blameIndex], textFadeTime);
+        string temp = "blame" + (blameIndex + 1).ToString();
+        AudioManager.Instance.PlaySFX(temp);
         blameIndex = (blameIndex + 1) % blameDialogs.Length;
         StartCoroutine(TextBoxKill());
     }
-    public void playDialogNeutral()
+    public void PlayDialogNeutral()
     {
-        PlayingTextAniNumbers++;
+        playingTextAniNumbers++;
         GetComponent<Image>().DOColor(new(1, 1, 1, 1), 0.25f);
         TextFade(neutralDialogs[neutralIndex], textFadeTime);
+        string temp = "neutral" + (neutralIndex + 1).ToString();
+        AudioManager.Instance.PlaySFX(temp);
         neutralIndex = (neutralIndex + 1) % neutralDialogs.Length;
         StartCoroutine(TextBoxKill());
     }
-    public void playDialogCompliment()
+    public void PlayDialogCompliment()
     {
-        PlayingTextAniNumbers++;
+        playingTextAniNumbers++;
         GetComponent<Image>().DOColor(new(1, 1, 1, 1), 0.25f);
         TextFade(complimentDialogs[complimentIndex], textFadeTime);
+        string temp = "compliment" + (complimentIndex + 1).ToString();
+        AudioManager.Instance.PlaySFX(temp);
         complimentIndex = (complimentIndex + 1) % complimentDialogs.Length;
         StartCoroutine(TextBoxKill());
     }
-    public void playDialogCup()
+    public void PlayDialogIntro()
     {
-        PlayingTextAniNumbers++;
+        playingTextAniNumbers++;
+        GetComponent<Image>().DOColor(new(1, 1, 1, 1), 0.25f);
+        TextFade(introDialogs[introIndex], textFadeTime);
+        string temp = "intro" + (introIndex + 1).ToString();
+        AudioManager.Instance.PlaySFX(temp);
+        introIndex = (introIndex + 1) % introDialogs.Length;
+        StartCoroutine(TextBoxKill());
+    }
+    public void PlayDialogCup()
+    {
+        playingTextAniNumbers++;
         GetComponent<Image>().DOColor(new(1, 1, 1, 1), 0.25f);
         TextFade(cupDialog, textFadeTime);
         StartCoroutine(TextBoxKill());
     }
-    public void playDialogThat()
+    public void PlayDialogThat()
     {
-        PlayingTextAniNumbers++;
+        playingTextAniNumbers++;
         GetComponent<Image>().DOColor(new(1, 1, 1, 1), 0.25f);
         TextFade(thatDialog, textFadeTime);
         StartCoroutine(TextBoxKill());
     }
 
-    public void PlayDialogVoice(int index)
+    public void OpeningDialog()
     {
-        print("voice play" + index.ToString());
+        StartCoroutine(StartIntroDialog());
     }
+
+    public void EndIntro()
+    {
+
+    }
+
+
 
 
 
 
     IEnumerator TextBoxKill()
     {
-        yield return new WaitForSeconds(3f);
-        if (PlayingTextAniNumbers == 1)
+        yield return new WaitForSeconds(8f);
+        if (playingTextAniNumbers == 1)
         {
             GetComponent<Image>().DOColor(new(1, 1, 1, 0), 0.1f);
             dialogContent.GetComponent<TMP_Text>().text = "";
         }
-        PlayingTextAniNumbers--;
+        playingTextAniNumbers--;
+    }
+
+    IEnumerator StartIntroDialog()
+    {
+        yield return new WaitForSeconds(1f);
+        PlayDialogIntro();
+        yield return new WaitForSeconds(7.8f);
+        PlayDialogIntro();
+        yield return new WaitForSeconds(4.5f);
+        PlayDialogIntro();
+        yield return new WaitForSeconds(7.8f);
+        PlayDialogIntro();
+        yield return new WaitForSeconds(7f);
+        PlayDialogIntro();
+        yield return new WaitForSeconds(7f);
+        EndIntro();
     }
 
 }
