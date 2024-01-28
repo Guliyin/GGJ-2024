@@ -18,7 +18,7 @@ public class Wind : MonoBehaviour
         }
     }
 
-    [Range(0, 500)]
+    [Range(0, 100)]
     [SerializeField] int windMax;
     [SerializeField] TMP_Text text;
     [SerializeField] bool enableWind = true;
@@ -32,7 +32,7 @@ public class Wind : MonoBehaviour
     }
     void NewWind()
     {
-        windForce = enableWind ? Random.Range(-windMax, windMax) / 100.0f : 0;
+        windForce = enableWind ? Random.Range(-windMax, windMax) / 100.0f * 5 : 0;
 
         text.text = "Wind: " + windForce;
     }

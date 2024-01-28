@@ -25,6 +25,7 @@ public class CameraCtrl : MonoBehaviour
     private void OnEnable()
     {
         EventCenter.AddListener<Transform>(FunctionType.FireWithTransform, PlayFlyingAnim);
+        EventCenter.AddListener(FunctionType.StartGame, ResetCamera);
         EventCenter.AddListener(FunctionType.Touch, TouchCallback);
         EventCenter.AddListener(FunctionType.NewFire, FlyingAnimOver);
     }

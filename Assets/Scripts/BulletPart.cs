@@ -6,13 +6,10 @@ public class BulletPart : Bullet
 {
     public int num;
 
-    float wind;
-
     GameObject a;
     GameObject b;
-    Rigidbody rb;
 
-    private void Start()
+    void Start()
     {
         a = transform.GetChild(0).gameObject;
         b = transform.GetChild(1).gameObject;
