@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    protected float wind;
     protected bool firstTouch = true;
+    protected Rigidbody rb;
 
     protected void Destroy()
     {

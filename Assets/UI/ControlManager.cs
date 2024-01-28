@@ -8,7 +8,7 @@ public class ControlManager : MonoBehaviour
 {
     private bool isDraftShowing;
     public GameObject draft;
-   
+
 
     void Awake()
     {
@@ -17,9 +17,12 @@ public class ControlManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (UIManager.Instance.currentProgress == UIManager.GameProgress.MainGame)
         {
-            DraftKeyPress();
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                DraftKeyPress();
+            }
         }
     }
 

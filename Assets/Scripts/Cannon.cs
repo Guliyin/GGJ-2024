@@ -21,15 +21,27 @@ public class Cannon : MonoBehaviour
     [SerializeField][Range(30, 32)] public float fireForce = 30;
     [SerializeField][Range(0, 1)] float turnRate = 0.1f;
 
+    private void Start()
+    {
+        for (int i = 0; i < projectiles.Length; i++)
+        {
+            if (i == projectiles.Length - 1) return;
+            projectiles[i].GetComponent<BulletPart>().num = i;
+        }
+    }
+
     private void Update()
     {
-        if (GameMgr.Instance.enableInput && Input.GetKeyDown(KeyCode.Space))
+        if (UIManager.Instance.currentProgress == UIManager.GameProgress.MainGame)
         {
-            Fire();
-        }
-        if (GameMgr.Instance.enableInput && input != Vector2.zero)
-        {
-            RotateCanon();
+            if (GameMgr.Instance.enableInput && Input.GetKeyDown(KeyCode.Space))
+            {
+                Fire();
+            }
+            if (GameMgr.Instance.enableInput && input != Vector2.zero)
+            {
+                RotateCanon();
+            }
         }
     }
     void Fire()
@@ -42,6 +54,7 @@ public class Cannon : MonoBehaviour
 
         EventCenter.Broadcast(FunctionType.Fire);
         EventCenter.Broadcast(FunctionType.FireWithTransform, bullet.transform);
+        AudioManager.Instance.PlaySFX("CannonFire");
     }
     void RotateCanon()
     {

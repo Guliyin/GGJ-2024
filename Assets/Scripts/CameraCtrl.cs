@@ -25,6 +25,7 @@ public class CameraCtrl : MonoBehaviour
     private void OnEnable()
     {
         EventCenter.AddListener<Transform>(FunctionType.FireWithTransform, PlayFlyingAnim);
+        EventCenter.AddListener(FunctionType.StartGame, ResetCamera);
         EventCenter.AddListener(FunctionType.Touch, TouchCallback);
         EventCenter.AddListener(FunctionType.NewFire, FlyingAnimOver);
     }
@@ -36,13 +37,16 @@ public class CameraCtrl : MonoBehaviour
 
     void Update()
     {
-        if (GameMgr.Instance.enableInput && Input.GetKeyDown(KeyCode.LeftShift))
+        if (UIManager.Instance.currentProgress == UIManager.GameProgress.MainGame)
         {
-            ZoomIn();
-        }
-        if (GameMgr.Instance.enableInput && Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            ResetCamera();
+            if (GameMgr.Instance.enableInput && Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                ZoomIn();
+            }
+            if (GameMgr.Instance.enableInput && Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                ResetCamera();
+            }
         }
     }
     private void LateUpdate()

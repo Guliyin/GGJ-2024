@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class BulletPart : Bullet
 {
-    float wind;
+    public int num;
 
     GameObject a;
     GameObject b;
-    Rigidbody rb;
 
-    private void Start()
+    void Start()
     {
         a = transform.GetChild(0).gameObject;
         b = transform.GetChild(1).gameObject;
@@ -30,6 +29,7 @@ public class BulletPart : Bullet
     protected override void Touch()
     {
         base.Touch();
+        GameMgr.Instance.CalculateDistance(num, transform.position);
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
         rb.useGravity = false;
@@ -39,6 +39,7 @@ public class BulletPart : Bullet
         if (collision.gameObject.CompareTag("Statue") || collision.gameObject.CompareTag("Part"))
         {
             Touch();
+            AudioManager.Instance.PlaySFX("Stick");
         }
     }
 }

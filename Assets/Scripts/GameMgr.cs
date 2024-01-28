@@ -17,12 +17,18 @@ public class GameMgr : MonoBehaviour
         }
     }
 
+    CorrectPos cPos;
+
     public bool enableInput;
     public float Animlength = 3;
 
     private void OnEnable()
     {
         EventCenter.AddListener(FunctionType.Fire, AfterFire);
+    }
+    private void Start()
+    {
+        cPos = FindObjectOfType(typeof(CorrectPos)) as CorrectPos;
     }
     void AfterFire()
     {
@@ -33,6 +39,11 @@ public class GameMgr : MonoBehaviour
     {
         enableInput = true;
         EventCenter.Broadcast(FunctionType.NewFire);
+    }
+    public void CalculateDistance(int num, Vector3 position)
+    {
+        float score = Vector3.Distance(cPos.pos[num],position);
+        print(score);
     }
     private void OnDisable()
     {
