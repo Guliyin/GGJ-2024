@@ -29,6 +29,8 @@ public class GameMgr : MonoBehaviour
     private void Start()
     {
         cPos = FindObjectOfType(typeof(CorrectPos)) as CorrectPos;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     void AfterFire()
     {
