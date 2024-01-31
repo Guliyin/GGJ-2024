@@ -40,11 +40,11 @@ public class CameraCtrl : MonoBehaviour
     {
         if (UIManager.Instance.currentProgress == UIManager.GameProgress.MainGame)
         {
-            if (GameMgr.Instance.enableInput && Input.GetKeyDown(KeyCode.LeftShift))
+            if (GameMgr.Instance.enableInput && Input.GetKeyDown(KeyCode.Space))
             {
                 ZoomIn();
             }
-            if (GameMgr.Instance.enableInput && Input.GetKeyUp(KeyCode.LeftShift))
+            if (GameMgr.Instance.enableInput && Input.GetKeyUp(KeyCode.Space))
             {
                 ResetCamera();
             }

@@ -21,6 +21,8 @@ public class Cannon : MonoBehaviour
     [SerializeField][Range(30, 32)] public float fireForce = 30;
     [SerializeField][Range(0, 1)] float turnRate = 0.1f;
 
+    bool aiming;
+
     private void Start()
     {
         for (int i = 0; i < projectiles.Length; i++)
@@ -34,8 +36,13 @@ public class Cannon : MonoBehaviour
     {
         if (UIManager.Instance.currentProgress == UIManager.GameProgress.MainGame)
         {
-            if (GameMgr.Instance.enableInput && Input.GetKeyDown(KeyCode.Space))
+            if(GameMgr.Instance.enableInput && Input.GetKeyDown(KeyCode.Space))
             {
+                aiming = true;
+            }
+            if (GameMgr.Instance.enableInput && Input.GetKeyUp(KeyCode.Space) && aiming)
+            {
+                aiming = false;
                 Fire();
             }
             if (GameMgr.Instance.enableInput && input != Vector2.zero)

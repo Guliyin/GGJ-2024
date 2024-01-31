@@ -111,7 +111,7 @@ public class GodDialogManager : MonoBehaviour
 
     public void PlayDialogBlame()
     {
-        if (canRespond)
+        if (canRespond &&(blameIndex<blameDialogs.Length))
         {
             StartCoroutine(Blame());
         }
@@ -119,7 +119,7 @@ public class GodDialogManager : MonoBehaviour
     }
     public void PlayDialogNeutral()
     {
-        if (canRespond)
+        if (canRespond && (neutralIndex < neutralDialogs.Length))
         {
             StartCoroutine(Neutral());
         }
@@ -127,7 +127,7 @@ public class GodDialogManager : MonoBehaviour
     }
     public void PlayDialogCompliment()
     {
-        if (canRespond)
+        if (canRespond && (complimentIndex < complimentDialogs.Length))
         {
             StartCoroutine(Compliment());
         }
@@ -211,7 +211,7 @@ public class GodDialogManager : MonoBehaviour
         TextFade(blameDialogs[blameIndex], textFadeTime);
         string temp = "blame" + (blameIndex + 1).ToString();
         AudioManager.Instance.PlaySFX(temp);
-        blameIndex = (blameIndex + 1) % blameDialogs.Length;
+        blameIndex++;
         StartCoroutine(TextBoxKill());
     }
     IEnumerator Compliment()
@@ -222,7 +222,7 @@ public class GodDialogManager : MonoBehaviour
         TextFade(complimentDialogs[complimentIndex], textFadeTime);
         string temp = "compliment" + (complimentIndex + 1).ToString();
         AudioManager.Instance.PlaySFX(temp);
-        complimentIndex = (complimentIndex + 1) % complimentDialogs.Length;
+        complimentIndex++;
         StartCoroutine(TextBoxKill());
     }
     IEnumerator Neutral()
@@ -233,7 +233,7 @@ public class GodDialogManager : MonoBehaviour
         TextFade(neutralDialogs[neutralIndex], textFadeTime);
         string temp = "neutral" + (neutralIndex + 1).ToString();
         AudioManager.Instance.PlaySFX(temp);
-        neutralIndex = (neutralIndex + 1) % neutralDialogs.Length;
+        neutralIndex++;
         StartCoroutine(TextBoxKill());
     }
     IEnumerator Cup()
